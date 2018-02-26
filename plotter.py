@@ -28,10 +28,7 @@ if __name__ == "__main__":
   handleak8PFJetsCHS, labelak8PFJetsCHS   = Handle ("std::vector<reco::PFJet>"),"ak8PFJetsCHS"
   handleak4PFJetsCHS, labelak4PFJetsCHS   = Handle ("std::vector<reco::PFJet>"),"ak4PFJetsCHS"
   handlePixelClusters, labelPixelClusters = Handle ("edmNew::DetSetVector<SiPixelCluster>"),"siPixelClusters"
-  
-  edm::ESHandle<TrackerGeometry> geom;
-    es.get<TrackerDigiGeometryRecord>().get( geom );
-    const TrackerGeometry& theTracker(*geom);
+
 
   events = Events(f)
   
@@ -44,26 +41,36 @@ if __name__ == "__main__":
     PixelClusters = handlePixelClusters.product()
     AK8jets = handleak8PFJetsCHS.product()
     # import pdb; pdb.set_trace()
-  #   for jet in AK8jets: #These are all the jets per event
-  #     print "Jet transverse momentum:" ,jet.pt()
-  #     histPt.Fill(jet.pt())
-  #
-  # c1 = rt.TCanvas("c1","c1",600,600) #https://root.cern.ch/doc/master/classTCanvas.html
-  # c1.cd()
-  # histPt.Draw()
-  # c1.SetLogy()
-  # c1.SaveAs("jetPt.png")
-  #For debugging
+    for jet in AK8jets: #These are all the jets per event
+      # print "Jet transverse momentum:" ,jet.pt()
+      histPt.Fill(jet.pt())
+
+  c1 = rt.TCanvas("c1","c1",600,600) #https://root.cern.ch/doc/master/classTCanvas.html
+  c1.cd()
+  histPt.Draw()
+  c1.SetLogy()
+  c1.SaveAs("jetPt.png")
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     
-    from Geometry.CommonTopologies.
-    for clust in PixelClusters.data():
-      print "Cluster x = " ,clust.x()
-      print "Cluster y = " ,clust.y()
-      
-    theGeomDet = theTracker.idToDet(hit_detId) )
-    topol = theGeomDet.specificTopology() 
-      
-      lp = topol.localPosition( MeasurementPoint( clust.x(), clust.y() ) )
+  
+    # edm::ESHandle<TrackerGeometry> geom;
+    #   es.get<TrackerDigiGeometryRecord>().get( geom );
+    #   const TrackerGeometry& theTracker(*geom);
+    # from Geometry.CommonTopologies.
+   #  for clust in PixelClusters.data():
+   #    print "Cluster x = " ,clust.x()
+   #    print "Cluster y = " ,clust.y()
+   #
+   #  theGeomDet = theTracker.idToDet(hit_detId) )
+   #  topol = theGeomDet.specificTopology()
+   #
+   #    lp = topol.localPosition( MeasurementPoint( clust.x(), clust.y() ) )
       # lx = lp.x()
       # ly = lp.y()
       #
